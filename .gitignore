@@ -1,0 +1,4 @@
+/node_modules
+/dist
+/view
+webpack.config.js
