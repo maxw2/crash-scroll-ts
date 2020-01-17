@@ -1,3 +1,14 @@
 .index{
     color: green;
+    .scroll{
+        width: 300px;
+        height: 400px;
+        overflow: hidden;
+        background: gray;
+        .content{
+            width: 400px;
+            height: 800px;
+            background: green;
+        }
+    }
 }

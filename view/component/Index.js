@@ -1,11 +1,20 @@
 import React from 'react'
 
-import { type } from '../../src/index.ts'
+import CScroll from '../../index'
 import './Index.scss'
 const Index = () => {
-    type()
+    React.useEffect(()=>{
+        new CScroll('.scroll',{
+            scrollX:false
+            
+        })
+    },[])
     return (
-        <div className='index'>index</div>
+        <div className='index'>
+            <div className='scroll'>
+                <div className='content'></div>
+            </div>
+        </div>
     )
 }
 
