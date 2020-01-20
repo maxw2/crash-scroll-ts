@@ -4,15 +4,21 @@ import CScroll from '../../index'
 import './Index.scss'
 const Index = () => {
     React.useEffect(()=>{
-        new CScroll('.scroll',{
+        let scroll = new CScroll('.scroll',{
             scrollX:false
             
         })
+
     },[])
     return (
         <div className='index'>
             <div className='scroll'>
-                <div className='content'></div>
+                <ul className='content'>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
             </div>
         </div>
     )

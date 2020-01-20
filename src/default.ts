@@ -6,14 +6,22 @@ let _default: OPTIONS = {
 }
 
 let pos: POS = {
-    downX: 0,
-    downY: 0,
-    moveX: 0,
-    moveY: 0,
-    disX: 0,
-    disY: 0,
-    x: 0,
-    y: 0
+    downX: null,
+    downY: null,
+    moveX: null,
+    moveY: null,
+    upX: null,
+    upY: null,
+    disX: null,
+    disY: null,
+    moveTime: null,
+    upTime: null,
+    startTime: null,
+    runTime: null,
+    endTime: null,
+    cancelTime: null,
+    x: null,
+    y: null
 }
 
 export { _default, pos }

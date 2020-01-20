@@ -15,8 +15,8 @@ class CScroll {
         const [dom, option] = initData(this.el, options)
         this.dom = dom
         this.op = option
-        this.el.dom = dom
         this.el.op = option
+        this.el.dom = dom
         initEvent(this.el)
 
     }

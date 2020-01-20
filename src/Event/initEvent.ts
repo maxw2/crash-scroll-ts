@@ -1,6 +1,6 @@
-import { pos } from '../default'
-import { getClient, getDis, getPos, viewPos, isMobile } from './viewPos'
-import { easa } from "./ease"
+import { isMobile } from './GetPos'
+import { onEventDown, onEventMove, onEventUp } from './TouchEvent'
+import { onTransitionStart, onTransitionMove, onTransitionEnd, onTransitionCancel } from './TransitionEvent'
 
 export function initEvent(element: any) {
     addEventListener(element)
@@ -21,6 +21,11 @@ function addEventListener(element: any) {
     element.addEventListener(typeMove, onEventMove)
     element.addEventListener(typeUp, onEventUp)
 
+    element.addEventListener('transitionstart', onTransitionStart)
+    element.addEventListener('transitionrun', onTransitionMove)
+    element.addEventListener('transitionend', onTransitionEnd)
+    element.addEventListener('transitioncancel', onTransitionCancel)
+
 }
 
 /**
@@ -32,42 +37,5 @@ function removeEventListener(element: any) {
 
 
 
-function onEventDown(ev: any) {
-    this.isDown = true
-    if (!this._pos) this._pos = pos;
-
-    [this._pos.downX, this._pos.downY] = getClient('down', ev)
-
-
-}
-
-
-function onEventMove(ev: any) {
-    if (!this.isDown) return
-
-    [this._pos.moveX, this._pos.moveY] = getClient('move', ev);
-
-    // 距离
-    // 三指
-    [this._pos.disX, this._pos.disY] = getDis(this);
-    
-    
-    // view移动
-    viewPos(this)
-
-
-
-}
-
-function onEventUp(ev: any) {
-    this.isDown = false;
-
-
-
-    easa(this);
-
-    [this._pos.x, this._pos.y] = getPos(this._pos)
-
-}
 
 

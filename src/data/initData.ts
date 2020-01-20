@@ -35,7 +35,7 @@ function initDom(element: any): DOM {
         left: 0,
         right: content_w - el_w,
         top: 0,
-        bottom: content_h - el_h
+        bottom: -(content_h - el_h)
     }
 
 
