@@ -1,6 +1,8 @@
 import { pos } from '../default'
 import { resistance } from './GetPos'
+import { stopTransition } from './TransitionEvent'
 import { viewPos } from './View'
+import { easeCss } from './Ease'
 
 function onEventDown(ev: any) {
     this.isDown = true
@@ -9,6 +11,8 @@ function onEventDown(ev: any) {
     this.$pos.downX = this.isMobile ? ev.touches[0].pageX : ev.pageX
     this.$pos.downY = this.isMobile ? ev.touches[0].pageY : ev.pageY
 
+    // 
+    stopTransition(this.dom)
 
 }
 
@@ -25,8 +29,8 @@ function onEventMove(ev: any) {
 
     // 
     if (this.$pos.y > this.dom.top || this.$pos.y < this.dom.bottom) {
-        this.$pos.x += this.$pos.disX * 0.2
-        this.$pos.y += this.$pos.disY * 0.2
+        this.$pos.x += this.$pos.disX * 0.4
+        this.$pos.y += this.$pos.disY * 0.4
     } else {
         this.$pos.x += this.$pos.disX;
         this.$pos.y += this.$pos.disY;
@@ -45,7 +49,13 @@ function onEventMove(ev: any) {
 function onEventUp(ev: any) {
     this.isDown = false;
     //
-    this.$pos = null
+
+
+    [this.$pos.x, this.$pos.y] = easeCss(this.op, this.dom, this.$pos.x, this.$pos.y)
+
+
+    // this.$pos = null
+
 }
 
 

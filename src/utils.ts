@@ -16,7 +16,7 @@ _.deepClone = function (target: object, sources: object): object {
         newObj = []
         tarObj.map((val, index) => {
             // 检查sources是否拥有属性
-            let len: number = sourArr.indexOf(""+index)
+            let len: number = sourArr.indexOf("" + index)
             if (len >= 0) {
                 sourArr.splice(len, 1)
             }
@@ -112,7 +112,23 @@ _.deepClone = function (target: object, sources: object): object {
 
     return newObj
 }
+_.getStyle = function (element: any, style: string): string {
+    var oStyle = element.currentStyle ? element.currentStyle : window.getComputedStyle(element, null);
+    if (oStyle.getPropertyValue) {
+        return oStyle.getPropertyValue(style);
+    } else {
+        return oStyle.getAttribute(style);
+    }
+}
+_.getMatrix = function (matrix: string): [number, number, number, number, number, number,] {
+    let reg = /\d{1,3}\b/g;
+    let arr = matrix.match(reg).map((val)=>{
+        return Number(val)
+    })
 
 
+    return arr
+
+}
 
 export default _
