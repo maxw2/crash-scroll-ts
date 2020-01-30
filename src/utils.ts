@@ -120,14 +120,32 @@ _.getStyle = function (element: any, style: string): string {
         return oStyle.getAttribute(style);
     }
 }
-_.getMatrix = function (matrix: string): [number, number, number, number, number, number,] {
+_.getMatrix = function (element: any, style: string): [number, number, number, number, number, number,] {
+
+    let _style = _.getStyle(element, style)
+
     let reg = /\d{1,3}\b/g;
-    let arr = matrix.match(reg).map((val)=>{
+    let arr = _style.match(reg).map((val: string) => {
         return Number(val)
     })
 
 
     return arr
+
+}
+
+_.getDuration = function (element: any, style: string): number {
+
+    let _style = _.getStyle(element, style)
+
+
+    let reg = /\d.+\d/g
+
+    let a = Number(_style.match(reg)) * 1000
+
+
+    return a
+
 
 }
 

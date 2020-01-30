@@ -72,35 +72,6 @@ function setPos(x: number, y: number): [number, number] {
 
 
 
-
-function resistanceDis(options: OPTIONS, dom: DOM, disX: any, disY: any, x: any, y: any): [number, number] {
-    let scrollX = options.scrollX
-    let left = dom.left
-    let right = dom.right
-    let top = dom.top
-    let bottom = dom.bottom
-    // let disX = pos.disX
-    // let disY = pos.disY
-    // let posX = pos.x + disX
-    // let posY = pos.y + disY
-    let posX = x + disX
-    let posY = y + disY
-
-
-    if (scrollX) {
-        if (posX > left || posX < right) disX = disX * 0.9
-
-
-    }
-    else if (!scrollX) {
-        if (posY > top || posY < bottom) disY = disY * 0.9
-    }
-
-    return [disX, disY]
-}
-
-
-
 /**
  * @name 阻力片
  * @param pos

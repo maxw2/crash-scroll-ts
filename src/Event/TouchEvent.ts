@@ -51,8 +51,8 @@ function onEventUp(ev: any) {
     //
 
 
-    [this.$pos.x, this.$pos.y] = easeCss(this.op, this.dom, this.$pos.x, this.$pos.y)
-
+    // [this.$pos.x, this.$pos.y] = easeCss(this.op, this.dom, this.$pos.x, this.$pos.y)
+    easeCss(this.op, this.dom, this.$pos.x, this.$pos.y)
 
     // this.$pos = null
 

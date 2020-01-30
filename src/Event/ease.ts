@@ -21,12 +21,12 @@ function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, num
     if (!scrollX) {
         if (y > top) {
 
-            content.style.transition = `0.3s transform ease-out 0s`
+            content.style.transition = `300ms transform ease 0s`
             content.style.transform = `translateY(${top}px) translateZ(0px)`
             return [x, top]
         } else if (y < bottom) {
 
-            content.style.transition = `0.3s transform ease-out 0s`
+            content.style.transition = `300ms transform ease 0s`
             content.style.transform = `translateY(${bottom}px) translateZ(0px)`
             return [x, bottom]
         }
