@@ -8,7 +8,7 @@ import { OPTIONS, DOM, POS } from '../interface'
  */
 function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, number] {
     let scrollX = options.scrollX
-    let content:any = dom.content
+    let content: any = dom.content
     let left = dom.left
     let right = dom.right
     let top = dom.top
@@ -20,14 +20,10 @@ function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, num
 
     if (!scrollX) {
         if (y > top) {
-
-            content.style.transition = `300ms transform ease 0s`
-            content.style.transform = `translateY(${top}px) translateZ(0px)`
+            viewPos(options, dom, null, top)
             return [x, top]
         } else if (y < bottom) {
-
-            content.style.transition = `300ms transform ease 0s`
-            content.style.transform = `translateY(${bottom}px) translateZ(0px)`
+            viewPos(options, dom, null, bottom)
             return [x, bottom]
         }
     }

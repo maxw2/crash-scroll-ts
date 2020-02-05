@@ -1,39 +1,50 @@
 import _ from '../utils'
 import { DOM } from '../interface'
 import { setPos } from './GetPos'
-import { viewPos } from './View'
+import { easeCss } from './Ease'
 
 function onTransitionStart(ev: any) {
-    this.$pos.startTime = ev.timeStamp
-    this.$pos.duration = _.getDuration(this.dom.content, 'transition-duration')
-
-
+    this.$pos.transitionMove = true
 }
 
 function onTransitionMove(ev: any) {
+    console.log('tranistionMove')
+
 
 }
 
 function onTransitionEnd(ev: any) {
-    this.$pos.endTime = ev.timeStamp
+    this.$pos.transitionMove = false
+    console.log('tranistionEnd')
+    
     let matrix = _.getMatrix(this.dom.content, 'transform')
 
-
-    let x = matrix[4]
+    let x = matrix[4];
     let y = matrix[5];
 
+    if (this.$pos.inertial) {
+        this.$pos.inertial = false
+        easeCss(this.op, this.dom, x, y)
+    }
+
     [this.$pos.x, this.$pos.y] = setPos(x, y)
+
+
+
+
+
 
 }
 
 function onTransitionCancel(ev: any) {
-    let time = Math.round(ev.timeStamp - this.$pos.startTime) / this.$pos.duration;
-    let x = this.$pos.x * time;
-    let y = this.$pos.y * time;
+    console.log('tranistionCancel')
+    // let time = Math.round(ev.timeStamp - this.$pos.startTime) / this.$pos.duration;
+    // let x = this.$pos.x * time;
+    // let y = this.$pos.y * time;
 
 
-    [this.$pos.x, this.$pos.y] = setPos(x, y)
-    viewPos(this.op, this.dom, this.$pos.x, this.$pos.y)
+    // [this.$pos.x, this.$pos.y] = setPos(x, y)
+    // viewPos(this.op, this.dom, this.$pos.x, this.$pos.y)
 
 }
 
@@ -42,7 +53,7 @@ function onTransitionCancel(ev: any) {
 function stopTransition(dom: DOM) {
     let content: any = dom.content
 
-    content.style.transition = ''
+    content.style.transitionDuration = '0s'
 
 }
 

@@ -124,7 +124,7 @@ _.getMatrix = function (element: any, style: string): [number, number, number, n
 
     let _style = _.getStyle(element, style)
 
-    let reg = /\d{1,3}\b/g;
+    let reg = /\-{0,1}\d{1,}\b/g;
     let arr = _style.match(reg).map((val: string) => {
         return Number(val)
     })

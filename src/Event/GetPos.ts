@@ -77,25 +77,25 @@ function setPos(x: number, y: number): [number, number] {
  * @param pos
  * @return {Array} 
  */
-function resistance(options: OPTIONS, dom: DOM, x: number, y: number): [number, number] {
+function resistance(options: OPTIONS, dom: DOM, disX: number, disY: number, num?: 0.4): [number, number] {
     let scrollX = options.scrollX
     let left = dom.left
     let right = dom.right
     let top = dom.top
     let bottom = dom.bottom
-    let _x = x
-    let _y = y
+    let x = disX
+    let y = disY
 
     if (scrollX) {
-        if (_x > left || _x < right) _x *= 0.4
+        if (x > left || x < right) x *= 0.4
 
     }
     else if (!scrollX) {
-        if (_y > top || _y < bottom) _y *= 0.4
+        if (y > top || y < bottom) y *= 0.4
 
     }
 
-    return [_x, _y]
+    return [x, y]
 }
 
 
