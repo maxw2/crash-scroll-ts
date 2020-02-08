@@ -35,8 +35,8 @@ function onEventMove(ev: any) {
     // 懵逼
     this.$pos.moveX = this.isMobile ? ev.touches[0].pageX : ev.pageX
     this.$pos.moveY = this.isMobile ? ev.touches[0].pageY : ev.pageY
-    this.$pos.distanceX = ev.touches[0].pageX || ev.pageX
-    this.$pos.distanceY = ev.touches[0].pageY || ev.pageY
+    this.$pos.distanceX = this.isMobile ? ev.touches[0].pageX : ev.pageX
+    this.$pos.distanceY = this.isMobile ? ev.touches[0].pageY : ev.pageY
     this.$pos.disX = this.$pos.moveX - this.$pos.downX
     this.$pos.disY = this.$pos.moveY - this.$pos.downY
 
@@ -49,7 +49,7 @@ function onEventMove(ev: any) {
     //     this.$pos.x += this.$pos.disX;
     //     this.$pos.y += this.$pos.disY;
     // }
-    let [x, y] = resistance(this.op, this.dom, this.$pos.disX, this.$pos.disY,0.4)
+    let [x, y] = resistance(this.op, this.dom, this.$pos, this.$pos.disX, this.$pos.disY)
     this.$pos.x += x
     this.$pos.y += y
 
@@ -69,8 +69,8 @@ function onEventUp(ev: any) {
     this.isDown = false;
     this.$pos.upT = ev.timeStamp
     //
-    this.dom.content.style.transitionDuration = '500ms'
-    this.dom.content.style.transitionTimingFunction = 'cubic-bezier(0.1, 0.57, 0.1, 1)'
+    this.dom.content.style.transitionDuration = '300ms'
+    this.dom.content.style.transitionTimingFunction = 'ease'
     this.dom.content.style.transitionProperty = 'transform'
 
     let time = this.$pos.upT - this.$pos.downT
