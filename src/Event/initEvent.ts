@@ -1,30 +1,31 @@
 import { isMobile } from './GetPos'
 import { onEventDown, onEventMove, onEventUp } from './TouchEvent'
-import { onTransitionStart, onTransitionMove, onTransitionEnd, onTransitionCancel } from './TransitionEvent'
+import { onTransitionStart, onTransitionEnd, onTransitionCancel } from './TransitionEvent'
 
-export function initEvent(element: any) {
-    addEventListener(element)
+export function initEvent(CScroll: object) {
+    addEventListener(CScroll)
 }
 
 /**
  * @name 事件代理
  * @param element 
  */
-function addEventListener(element: any) {
-    element.isMobile = isMobile()
+function addEventListener(CScroll: object) {
+    const that: any = CScroll
+    that.isMobile = isMobile()
 
-    const typeDown = element.isMobile ? 'touchstart' : 'mousedown'
-    const typeMove = element.isMobile ? 'touchmove' : 'mousemove'
-    const typeUp = element.isMobile ? 'touchend' : 'mouseup'
+    const typeDown = that.isMobile ? 'touchstart' : 'mousedown'
+    const typeMove = that.isMobile ? 'touchmove' : 'mousemove'
+    const typeUp = that.isMobile ? 'touchend' : 'mouseup'
 
-    element.addEventListener(typeDown, onEventDown)
-    element.addEventListener(typeMove, onEventMove)
-    element.addEventListener(typeUp, onEventUp)
+    that.$el.addEventListener(typeDown, onEventDown.bind(that))
+    that.$el.addEventListener(typeMove, onEventMove.bind(that))
+    that.$el.addEventListener(typeUp, onEventUp.bind(that))
 
-    element.addEventListener('transitionstart', onTransitionStart)
-    element.addEventListener('transitionrun', onTransitionMove)
-    element.addEventListener('transitionend', onTransitionEnd)
-    element.addEventListener('transitioncancel', onTransitionCancel)
+    that.$el.addEventListener('transitionstart', onTransitionStart.bind(that))
+    // that.$el.addEventListener('transitionrun', onTransitionRun.bind(that))
+    that.$el.addEventListener('transitionend', onTransitionEnd.bind(that))
+    that.$el.addEventListener('transitioncancel', onTransitionCancel.bind(that))
 
 }
 

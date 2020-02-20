@@ -1,24 +1,21 @@
+import { on } from './default'
+import { OPTIONS, DOM, ON } from './interface'
 import { initData } from './data/initData'
-import { initEvent } from './Event/initEvent'
-
+import { initEvent } from './event/initEvent'
+import { initOn } from './on/initOn'
 
 class CScroll {
-    el: any
-    op: object
-    dom?: object
-
+    $el: any
+    $op: OPTIONS
+    $dom?: DOM
+    $on: ON = on
     constructor(element: object | string, options: object) {
         typeof element === 'string' ?
-            this.el = document.querySelector(element) :
-            this.el = element
+            this.$el = document.querySelector(element) : this.$el = element;
 
-        const [dom, option] = initData(this.el, options)
-        this.dom = dom
-        this.op = option
-        this.el.op = option
-        this.el.dom = dom
-        initEvent(this.el)
-
+        [this.$dom, this.$op] = initData(this.$el, options)
+        initEvent(this)
+        initOn(this)
     }
 }
 

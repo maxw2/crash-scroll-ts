@@ -8,31 +8,28 @@
         overflow: hidden;
         background: gray;
         .content{
-            width: 260px;
+            width: 100%;
             min-height: 1600px;
             background: green;
             list-style: none;
             margin: 0px;
             padding: 0px;
             color: white;
-            li:nth-child(1){
-                width: 100%;
+            overflow: hidden;
+            li{
+                width: 200%;
                 height: 400px;
+            }
+            li:nth-child(1){
                 background: red;
             }
             li:nth-child(2){
-                width: 100%;
-                height: 400px;
                 background: blue;
             }
             li:nth-child(3){
-                width: 100%;
-                height: 400px;
                 background: orange;
             }
             li:nth-child(4){
-                width: 100%;
-                height: 400px;
                 background: pink;
             }
         }

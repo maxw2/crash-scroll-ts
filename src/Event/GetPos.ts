@@ -66,12 +66,6 @@ function setPos(x: number, y: number): [number, number] {
 }
 
 
-
-
-
-
-
-
 /**
  * @name 阻力片
  * @param pos

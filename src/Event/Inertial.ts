@@ -6,18 +6,18 @@ import { resistance } from './GetPos'
  * @name 惯性滑动
  * @param options 
  * @param dom 
- * @return {Boolean}
+ * @return {Boolean} 是否滑动 
  */
-function InertialCss(options: OPTIONS, dom: DOM, pos: POS, time: number, num: number) {
+function InertialCss(options: OPTIONS, dom: DOM, pos: POS, time: number, num: number, isMove: boolean) {
     if (time > 200) return false
+    if (!isMove) return false
     let scrollX = options.scrollX
     let distance = pos.moveY - pos._downY
     let speed = distance / time
     let content: any = dom.content
-    
+
 
     let inertia = speed / num
-
 
 
 
@@ -27,7 +27,6 @@ function InertialCss(options: OPTIONS, dom: DOM, pos: POS, time: number, num: nu
     let _y = null
     if (options.scrollX) {
         if (x > dom.left) {
-            // let [_x, _y] = 
             let disX = x - dom.left;
             [_x, _y] = resistance(options, dom, pos, disX, null)
             _x += dom.left
@@ -38,9 +37,8 @@ function InertialCss(options: OPTIONS, dom: DOM, pos: POS, time: number, num: nu
         } else {
             _x = x
         }
-    } else {
+    } else if(!options.scrollX){
         if (y > dom.top) {
-            // let [_x, _y] = 
             let disY = y - dom.top;
             [_x, _y] = resistance(options, dom, pos, null, disY)
             _y += dom.top
@@ -59,9 +57,9 @@ function InertialCss(options: OPTIONS, dom: DOM, pos: POS, time: number, num: nu
 
 
     if (!scrollX) {
-        if(y > dom.top || y < dom.bottom) content.style.transitionDuration = '150ms'
+        if (y > dom.top || y < dom.bottom) content.style.transitionDuration = '150ms'
         viewPos(options, dom, null, y)
-    } else {
+    } else if (scrollX){
         if (x > dom.left || x < dom.right) content.style.transitionDuration = '150ms'
         viewPos(options, dom, x, null)
     }

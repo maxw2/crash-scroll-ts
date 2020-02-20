@@ -5,46 +5,68 @@ import { easeCss } from './Ease'
 
 function onTransitionStart(ev: any) {
     this.$pos.transitionMove = true
+    console.log('tranistionStart')
+
+
+    // on
+    if (this.$on.scroll) {
+        this.time = setInterval(() => {
+            this.$on.scroll.forEach((fn: any) => {
+                // fn(this.$pos)
+                let matrix = _.getMatrix(this.$dom.content, 'transform')
+                let x = matrix[4];
+                let y = matrix[5];
+                fn({ x: x, y: y })
+            })
+        }, 50)
+    }
 }
 
-function onTransitionMove(ev: any) {
-    console.log('tranistionMove')
-
-
-}
 
 function onTransitionEnd(ev: any) {
     this.$pos.transitionMove = false
     console.log('tranistionEnd')
-    
-    let matrix = _.getMatrix(this.dom.content, 'transform')
+
+    let matrix = _.getMatrix(this.$dom.content, 'transform')
 
     let x = matrix[4];
     let y = matrix[5];
 
     if (this.$pos.inertial) {
         this.$pos.inertial = false
-        easeCss(this.op, this.dom, x, y)
+        easeCss(this.$op, this.$dom, x, y)
     }
 
     [this.$pos.x, this.$pos.y] = setPos(x, y)
 
 
+    //
 
+    window.clearInterval(this.time)
 
+    if (this.$on.scroll) {
+        this.$on.scroll.forEach((fn: any) => {
+            fn({ x: this.$pos.x, y: this.$pos.y })
+        })
+    }
 
 
 }
 
 function onTransitionCancel(ev: any) {
     console.log('tranistionCancel')
-    // let time = Math.round(ev.timeStamp - this.$pos.startTime) / this.$pos.duration;
-    // let x = this.$pos.x * time;
-    // let y = this.$pos.y * time;
+    window.clearInterval(this.time)
+
+    if (this.$on.scroll) {
+        this.$on.scroll.forEach((fn: any) => {
+            let matrix = _.getMatrix(this.$dom.content, 'transform')
+            let x = matrix[4];
+            let y = matrix[5];
+            fn({ x: x, y: y })
+        })
+    }
 
 
-    // [this.$pos.x, this.$pos.y] = setPos(x, y)
-    // viewPos(this.op, this.dom, this.$pos.x, this.$pos.y)
 
 }
 
@@ -59,7 +81,7 @@ function stopTransition(dom: DOM) {
 
 export {
     onTransitionStart,
-    onTransitionMove,
+    // onTransitionRun,
     onTransitionEnd,
     onTransitionCancel,
     stopTransition

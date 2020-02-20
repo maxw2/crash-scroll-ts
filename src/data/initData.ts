@@ -3,7 +3,7 @@ import { _default } from '../default'
 import _ from '../utils'
 
 // 暴露方法 导出属性
-export function initData(element: object, options: OPTIONS): [object, object] {
+export function initData(element: object, options: OPTIONS): [DOM, OPTIONS] {
 
     let dom = initDom(element)
     let op = initOp(options)

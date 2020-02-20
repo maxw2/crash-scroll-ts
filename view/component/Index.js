@@ -6,9 +6,10 @@ const Index = () => {
     React.useEffect(()=>{
         let scroll = new CScroll('.scroll',{
             scrollX:false
-            
         })
-
+        scroll.on('scroll',(ev)=>{
+            console.log(ev)
+        })
     },[])
     return (
         <div className='index'>

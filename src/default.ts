@@ -1,4 +1,4 @@
-import { OPTIONS, POS } from './interface'
+import { OPTIONS, POS, ON } from './interface'
 
 let _default: OPTIONS = {
     scrollX: false,
@@ -27,4 +27,11 @@ let pos: POS = {
     y: null
 }
 
-export { _default, pos }
+let on: ON = {
+    scroll: [],
+    mousedown:[],
+    mousemove:[],
+    mouseup:[]
+}
+
+export { _default, pos, on }

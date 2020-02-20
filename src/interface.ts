@@ -1,3 +1,6 @@
+interface OPTIONS {
+    scrollX?: false
+}
 
 interface DOM {
     readonly el: object,
@@ -10,13 +13,6 @@ interface DOM {
     right: number,
     top: number,
     bottom: number
-}
-
-interface OPTIONS {
-    scrollX?: false
-
-
-
 }
 
 interface POS {
@@ -41,5 +37,12 @@ interface POS {
     y: number,
 }
 
+interface ON {
+    scroll: object[],
+    mousedown: object[],
+    mousemove: object[],
+    mouseup: object[],
+}
 
-export { DOM, OPTIONS, POS }
+
+export { DOM, OPTIONS, POS, ON }

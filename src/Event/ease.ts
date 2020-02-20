@@ -8,13 +8,10 @@ import { OPTIONS, DOM, POS } from '../interface'
  */
 function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, number] {
     let scrollX = options.scrollX
-    let content: any = dom.content
     let left = dom.left
     let right = dom.right
     let top = dom.top
     let bottom = dom.bottom
-    let _x = x
-    let _y = y
 
 
 
@@ -25,6 +22,14 @@ function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, num
         } else if (y < bottom) {
             viewPos(options, dom, null, bottom)
             return [x, bottom]
+        }
+    } else if (scrollX) {
+        if (x < left) {
+            viewPos(options, dom, left, null)
+            return [left, y]
+        } else if (x > right) {
+            viewPos(options, dom, right, null)
+            return [right, y]
         }
     }
 
