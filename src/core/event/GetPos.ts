@@ -85,10 +85,10 @@ function resistance(options: OPTIONS, dom: DOM, pos: POS, disX: number, disY: nu
     if (scrollX) {
         if (posX > left || posX < right) x *= 0.4
 
-    }
-    else if (!scrollX) {
-        if (posY > top || posY < bottom) y *= 0.4
-
+    } else {
+        if (posY > top || posY < bottom) {
+            y *= 0.4 
+        }
     }
 
     return [x, y]

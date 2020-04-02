@@ -1,6 +1,6 @@
 import { DOM, OPTIONS } from '../interface'
 import { _default } from '../default'
-import _ from '../utils'
+import _ from '../../utils'
 
 // 暴露方法 导出属性
 export function initData(element: object, options: OPTIONS): [DOM, OPTIONS] {
@@ -33,7 +33,7 @@ function initDom(element: any): DOM {
         content_w: content_w,
         content_h: content_h,
         left: 0,
-        right: content_w - el_w,
+        right: -(content_w - el_w),
         top: 0,
         bottom: -(content_h - el_h)
     }

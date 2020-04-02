@@ -13,7 +13,7 @@ export function initEvent(CScroll: object) {
 function addEventListener(CScroll: object) {
     const that: any = CScroll
     that.isMobile = isMobile()
-
+    
     const typeDown = that.isMobile ? 'touchstart' : 'mousedown'
     const typeMove = that.isMobile ? 'touchmove' : 'mousemove'
     const typeUp = that.isMobile ? 'touchend' : 'mouseup'
@@ -23,7 +23,6 @@ function addEventListener(CScroll: object) {
     that.$el.addEventListener(typeUp, onEventUp.bind(that))
 
     that.$el.addEventListener('transitionstart', onTransitionStart.bind(that))
-    // that.$el.addEventListener('transitionrun', onTransitionRun.bind(that))
     that.$el.addEventListener('transitionend', onTransitionEnd.bind(that))
     that.$el.addEventListener('transitioncancel', onTransitionCancel.bind(that))
 

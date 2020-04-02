@@ -12,9 +12,6 @@ function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, num
     let right = dom.right
     let top = dom.top
     let bottom = dom.bottom
-
-
-
     if (!scrollX) {
         if (y > top) {
             viewPos(options, dom, null, top)
@@ -23,11 +20,11 @@ function easeCss(options: OPTIONS, dom: DOM, x: number, y: number): [number, num
             viewPos(options, dom, null, bottom)
             return [x, bottom]
         }
-    } else if (scrollX) {
-        if (x < left) {
+    } else {
+        if (x > left) {
             viewPos(options, dom, left, null)
             return [left, y]
-        } else if (x > right) {
+        } else if (x < right) {
             viewPos(options, dom, right, null)
             return [right, y]
         }

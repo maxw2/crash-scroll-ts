@@ -1,4 +1,4 @@
-import { CScroll } from './src/CScroll'
+import { CScroll } from './src/core/CScroll'
+import { Swiper } from './src/swiper/Swiper'
 
-
-export default CScroll
+export { CScroll, Swiper }

@@ -1,18 +1,21 @@
 interface OPTIONS {
-    scrollX?: false
+    scrollX: boolean,
+    inertial: boolean,
+    swiper: boolean,
+    resistance: boolean,
+    direction: boolean
 }
 
-interface DOM {
-    readonly el: object,
-    content: object,
-    el_w: number,
-    el_h: number,
-    content_w: number,
-    content_h: number,
-    left: number,
-    right: number,
-    top: number,
-    bottom: number
+interface SDOM {
+    chilrenLen: number,
+    children: {
+        width: number,
+        height: number,
+        left: number,
+        right: number,
+        top: number,
+        bottom: number
+    }[]
 }
 
 interface POS {
@@ -45,4 +48,4 @@ interface ON {
 }
 
 
-export { DOM, OPTIONS, POS, ON }
+export { SDOM, OPTIONS, POS, ON }

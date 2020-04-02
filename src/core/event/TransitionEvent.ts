@@ -1,22 +1,20 @@
-import _ from '../utils'
+import _ from '../../utils'
 import { DOM } from '../interface'
 import { setPos } from './GetPos'
 import { easeCss } from './Ease'
 
 function onTransitionStart(ev: any) {
     this.$pos.transitionMove = true
-    console.log('tranistionStart')
-
-
     // on
     if (this.$on.scroll) {
-        this.time = setInterval(() => {
-            this.$on.scroll.forEach((fn: any) => {
-                // fn(this.$pos)
+        this.$on.time = setInterval(() => {
+            this.$on.scroll.forEach((val: any) => {
+                // if (this.$el !== val.el) return
                 let matrix = _.getMatrix(this.$dom.content, 'transform')
                 let x = matrix[4];
                 let y = matrix[5];
-                fn({ x: x, y: y })
+                [this.$pos.x, this.$pos.y] = setPos(x, y)
+                val.fn.call(this, ev)
             })
         }, 50)
     }
@@ -24,29 +22,29 @@ function onTransitionStart(ev: any) {
 
 
 function onTransitionEnd(ev: any) {
+    window.clearInterval(this.$on.time)
     this.$pos.transitionMove = false
-    console.log('tranistionEnd')
+    //
+    
 
     let matrix = _.getMatrix(this.$dom.content, 'transform')
-
     let x = matrix[4];
     let y = matrix[5];
 
     if (this.$pos.inertial) {
         this.$pos.inertial = false
         easeCss(this.$op, this.$dom, x, y)
-    }
+    };
 
     [this.$pos.x, this.$pos.y] = setPos(x, y)
 
 
-    //
 
-    window.clearInterval(this.time)
-
+    // on
     if (this.$on.scroll) {
-        this.$on.scroll.forEach((fn: any) => {
-            fn({ x: this.$pos.x, y: this.$pos.y })
+        this.$on.scroll.forEach((val: any) => {
+            // if (this.$el !== val.el) return
+            val.fn.call(this, ev)
         })
     }
 
@@ -54,35 +52,26 @@ function onTransitionEnd(ev: any) {
 }
 
 function onTransitionCancel(ev: any) {
-    console.log('tranistionCancel')
-    window.clearInterval(this.time)
+    window.clearInterval(this.$on.time)
 
+    let matrix = _.getMatrix(this.$dom.content, 'transform')
+    let x = matrix[4];
+    let y = matrix[5];
+
+    [this.$pos.x, this.$pos.y] = setPos(x, y)
+
+    // on
     if (this.$on.scroll) {
-        this.$on.scroll.forEach((fn: any) => {
-            let matrix = _.getMatrix(this.$dom.content, 'transform')
-            let x = matrix[4];
-            let y = matrix[5];
-            fn({ x: x, y: y })
+        this.$on.scroll.forEach((val: any) => {
+            val.fn.call(this, ev)
         })
     }
 
-
-
 }
 
-
-
-function stopTransition(dom: DOM) {
-    let content: any = dom.content
-
-    content.style.transitionDuration = '0s'
-
-}
 
 export {
     onTransitionStart,
-    // onTransitionRun,
     onTransitionEnd,
     onTransitionCancel,
-    stopTransition
 }

@@ -2,7 +2,10 @@ import { OPTIONS, POS, ON } from './interface'
 
 let _default: OPTIONS = {
     scrollX: false,
-
+    inertial: true,
+    swiper: false,
+    resistance: true,
+    direction: false
 }
 
 let pos: POS = {
@@ -23,15 +26,21 @@ let pos: POS = {
     runTime: null,
     endTime: null,
     cancelTime: null,
-    x: null,
-    y: null
+    isMove: null,
+    isDown: null,
+    isMobile: null,
+    x: 0,
+    y: 0,
+    btn: 0
 }
 
 let on: ON = {
     scroll: [],
-    mousedown:[],
-    mousemove:[],
-    mouseup:[]
+    mousedown: [],
+    mousemove: [],
+    mouseup: [],
+    swiper: [],
+    time: 0
 }
 
 export { _default, pos, on }
